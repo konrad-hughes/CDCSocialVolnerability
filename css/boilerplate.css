@@ -1,0 +1,215 @@
+html {
+  height                   : 100%;
+  font-size                : 100%;
+  -webkit-text-size-adjust : 100%;
+  -moz-text-size-adjust    : 100%;
+  -ms-text-size-adjust     : 100%;
+}
+
+body {
+  min-height : 100%;
+  margin     : 0;
+}
+
+body * {
+  outline : none;
+}
+
+#viewDiv {
+  cursor     : pointer;
+  height     : 450px;
+  margin     : 0;
+  padding    : 0;
+  box-shadow : 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+#selected-item-panel {
+  height : 475px;
+}
+
+.themes-image-panel {
+  padding : 10px;
+  /*background : url(../images/cdc_sovi_chart.png) no-repeat;*/
+  width   : 432px !important;
+  height  : 351px !important;
+}
+
+#user-thumb-node {
+  height         : 36px;
+  border-radius  : 18px;
+  vertical-align : middle;
+}
+
+.esri-search__input {
+  height : 32px !important;
+}
+
+.esri-print__container {
+  max-height : unset;
+}
+
+.drawer-nav {
+  width : 350px;
+}
+
+.drawer-left .drawer-nav {
+  left : -280px;
+}
+
+#overall-panel,
+#theme-lists-panel {
+  /*height   : 300px;*/
+  /*overflow : auto;*/
+}
+
+.theme-list {
+  padding   : 5px;
+  font-size : 9pt !important;
+}
+
+.theme-list.is-active {
+  background-color : #fefefe;
+  /*box-shadow       : 0 1px 2px rgba(0, 0, 0, 0.3);*/
+}
+
+.theme-list.is-active .vulnerable-item {
+  color : red;
+}
+
+.theme-btn {
+  cursor      : pointer;
+  color       : #fff;
+  padding     : 5px;
+  line-height : 1.5;
+  white-space : normal !important;
+  border      : solid 4px transparent;
+  box-shadow  : 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.theme-btn:hover {
+  border-color : #cc5252;
+}
+
+.theme-btn.is-active {
+  border-color : red;
+}
+
+#THEMES-btn {
+  color            : unset !important;
+  background-color : #fff;
+}
+
+#THEME1-btn {
+  color            : #fff;
+  background-color : #73c476;
+}
+
+#THEME2-btn {
+  color            : #fff;
+  background-color : #fe9929;
+}
+
+#THEME3-btn {
+  color            : #fff;
+  background-color : #9e9ac8;
+}
+
+#THEME4-btn {
+  color            : #fff;
+  background-color : #6baed6;
+}
+
+.THEMES-menu-item {
+  border-left : solid 6px #fff;
+}
+
+.THEME1-menu-item {
+  border-left : solid 6px #73c476;
+}
+
+.THEME2-menu-item {
+  border-left : solid 6px #fe9929;
+}
+
+.THEME3-menu-item {
+  border-left : solid 6px #9e9ac8;
+}
+
+.THEME4-menu-item {
+  border-left : solid 6px #6baed6;
+}
+
+.theme-label {
+  padding          : 5px;
+  border-bottom    : solid 2px transparent;
+  background-color : #fff;
+}
+
+.THEMES-label {
+  border-color : #ccc;
+}
+
+.THEME1-label {
+  color        : #73c476;
+  border-color : #73c476;
+}
+
+.THEME2-label {
+  color        : #fe9929;
+  border-color : #fe9929;
+}
+
+.THEME3-label {
+  color        : #9e9ac8;
+  border-color : #9e9ac8;
+}
+
+.THEME4-label {
+  color        : #6baed6;
+  border-color : #6baed6;
+}
+
+.vulnerable-item {
+  cursor : pointer;
+  border : solid 2px transparent;
+}
+
+.vulnerable-item:hover,
+.vulnerable-item.is-active {
+  border-color : cyan;
+}
+
+.chart_node {
+  height : 140px;
+}
+
+#chart_THEMES.chart_node {
+  height : 250px;
+}
+
+.dijitTooltipContainer {
+  padding    : 10px;
+  border     : solid #cccccc 1px;
+  color      : #1d87c7;
+  background : #fff;
+}
+
+/*
+.third-nav .column-24 div {
+  border : solid 1px red;
+}*/
+
+.input-group {
+  vertical-align : middle !important;
+}
+
+.esri-search--multiple-sources ul, ol {
+  font-size   : unset !important;
+  line-height : unset !important;
+}
+
+.esri-search--multiple-sources li {
+  list-style-position : unset !important;
+  margin              : unset !important;
+}
+

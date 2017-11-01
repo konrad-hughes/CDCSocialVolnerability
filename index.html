@@ -1,0 +1,236 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+    <link rel="stylesheet" href="//s3-us-west-1.amazonaws.com/patterns.esri.com/files/calcite-web/1.0.0-rc.7/css/calcite-web.min.css">
+    <link rel="stylesheet" href="//js.arcgis.com/4.5/esri/css/main.css">
+    <link rel="stylesheet" href="//js.arcgis.com/4.5/dijit/themes/claro/claro.css">
+    <link rel="stylesheet" href="./css/boilerplate.css">
+    <script type="text/javascript" src="./js/dojoConfig.js"></script>
+    <script type="text/javascript" src="//js.arcgis.com/4.5/"></script>
+    <script type="text/javascript">
+      require([
+        "boilerplate",
+        "dojo/text!config/config.json",
+        "dojo/text!boilerplate/settings.json",
+        "application"
+      ], function (Boilerplate, configSettings, boilerplateSettings, app) {
+
+        new Boilerplate(JSON.parse(configSettings), JSON.parse(boilerplateSettings)).then(function (boilerplateResponse) {
+          const exampleApp = new app();
+          exampleApp.init(boilerplateResponse);
+        });
+
+      });
+    </script>
+  </head>
+  <body>
+
+    <!-- DETAILS -->
+    <div class="js-modal modal-overlay" data-modal="app-details-dialog">
+      <div class="modal-content column-12" role="dialog" aria-labelledby="modal" role="dialog">
+        <a class="js-modal-toggle right icon-ui-close" href="#" aria-label="close-modal"></a>
+        <h3 class='trailer-half'>Boilerplate Template and Calcite Web</h3>
+        <p>This application template loads a web map or web scene and provides basic mapping capabilities via the ArcGIS API for JavaScript 4.x.</p>
+        <div>This application is built using:
+          <ul>
+            <li>
+              <a href="https://developers.arcgis.com/javascript/" target="_blank">Esri ArcGIS API for Javascript 4.x</a>
+            </li>
+            <li>
+              <a href="https://github.com/Esri/application-boilerplate-js" target="_blank">Esri Application Boilerplate Template</a>
+            </li>
+            <li>
+              <a href="http://esri.github.io/calcite-web/" target="_blank">Esri Calcite Web framework</a>
+            </li>
+          </ul>
+        </div>
+        <div class="text-right">
+          <span class="left esri-logo"></span>
+          <button class="btn js-modal-toggle">OK</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- PRINT SIDE DRAWER -->
+    <div class="drawer drawer-left js-drawer" data-drawer="print-drawer" tabindex="0">
+      <nav class="drawer-nav" role="navigation">
+        <!--<div class="panel panel-white">-->
+          <div id="print-node"></div>
+        <!--</div>-->
+      </nav>
+    </div>
+
+    <!-- BODY WRAPPER -->
+    <div class="wrapper">
+
+      <!-- TOP NAVIGATION -->
+      <header class="top-nav">
+        <div class="grid-container">
+          <div class="column-24">
+
+            <!-- APP TITLE -->
+            <span id="app-title-node" class="top-nav-title text-blue avenir-bold"></span>
+
+            <!-- ACTIONS -->
+            <nav class="top-nav-list" role="navigation" aria-labelledby="topnav">
+
+              <div class="dropdown js-dropdown">
+                <button class="btn btn-transparent dropdown-btn js-dropdown-toggle top-nav-link icon-ui-layers" tabindex="0" aria-haspopup="true" aria-expanded="false">
+                  ArcGIS.com Items
+                  <span class="icon-ui-down"></span>
+                </button>
+                <nav id="items-menu" class="dropdown-menu" role="menu"></nav>
+              </div>
+
+              <div class="dropdown js-dropdown">
+                <button class="btn btn-transparent dropdown-btn js-dropdown-toggle top-nav-link" tabindex="0" aria-haspopup="true" aria-expanded="false" title="View chart of CDC SVI Themes">
+                  Themes
+                  <span class="icon-ui-down"></span>
+                </button>
+                <div class="dropdown-menu" role="menu">
+                  <div class="panel panel-white themes-image-panel">
+                    <img src="./images/cdc_sovi_chart.png">
+                  </div>
+                </div>
+              </div>
+
+              <a class="top-nav-link" title="Open link to CDC SVI Documentation" href="https://svi.cdc.gov/Documents/Data/2014_SVI_Data/SVI2014Documentation.pdf" target="_blank">
+                Documentation
+                <span class="icon-ui-link-external"></span>
+              </a>
+
+            </nav>
+
+            <!-- APP DETAILS -->
+            <nav id="app-details-node" class="top-nav-list right" role="navigation">
+              <span id="print-action-node" class="top-nav-link icon-ui-printer margin-left-1 js-drawer-toggle esri-interactive" title="Print Map" data-drawer="print-drawer"></span>
+              <span class="top-nav-link icon-ui-description margin-left-1 js-modal-toggle esri-interactive" title="App Details" data-modal="app-details-dialog"></span>
+            </nav>
+
+          </div>
+        </div>
+      </header>
+
+      <!-- REST OF BODY -->
+      <div class="grid-container">
+
+        <div class="column-24 leader-half">
+          <div class="column-17">
+            <div id="theme-buttons" class="block-group block-group-5-up trailer-quarter">
+              <button id="THEMES-btn" class="block btn theme-btn font-size--3">Overall Score</button>
+              <button id="THEME1-btn" class="block btn theme-btn font-size--3">Socioeconomic Status</button>
+              <button id="THEME2-btn" class="block btn theme-btn font-size--3">Household Composition & Disability</button>
+              <button id="THEME3-btn" class="block btn theme-btn font-size--3">Minority Status & Language</button>
+              <button id="THEME4-btn" class="block btn theme-btn font-size--3">Housing & Transportation</button>
+            </div>
+            <div id="viewDiv"></div>
+          </div>
+          <div class="column-7">
+            <div id="selected-item-panel" class="panel">
+              <label class="text-blue text-rule trailer-half">
+                <span id="selected-item-label">County or Census Tract</span>
+              </label>
+              <table class="table-plain">
+                <tbody>
+                  <tr>
+                    <td style="width:50%">Population</td>
+                    <td class="text-right">
+                      <span id="selected-item-pop"></span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="width:50%">Daytime Population</td>
+                    <td class="text-right">
+                      <span id="selected-item-day-pop"></span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Housing Units</td>
+                    <td class="text-right">
+                      <span id="selected-item-hu"></span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Households</td>
+                    <td class="text-right">
+                      <span id="selected-item-hh"></span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <div class="text-center text-blue">
+                <span>Overall Vulnerability Score:</span>
+                <span id="selected-item-score" class="avenir-bold">0.000</span>
+              </div>
+              <div id="chart_THEMES" class="chart_node"></div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="column-24 leader-half">
+          <div class="panel">
+            <div class="block-group block-group-4-up">
+              <div class="block">
+                <div id="chart_THEME1" class="chart_node"></div>
+              </div>
+              <div class="block">
+                <div id="chart_THEME2" class="chart_node"></div>
+              </div>
+              <div class="block">
+                <div id="chart_THEME3" class="chart_node"></div>
+              </div>
+              <div class="block">
+                <div id="chart_THEME4" class="chart_node"></div>
+              </div>
+            </div>
+            <!--<div class="text-center font-size&#45;&#45;3">
+              Red Outline = counties or census tracts in the top 10% of values.
+            </div>-->
+          </div>
+        </div>
+
+        <div class="column-24 leader-half">
+          <div class="column-6">
+            <div id="overall-panel" class="panel font-size--3">
+              <div class="text-blue font-size-1 trailer-quarter">Most Vulnerable</div>
+              <label class="theme-label THEMES-label text-center trailer-0">Overall Score</label>
+              <ol id="THEMES-list" class="theme-list list-numbered font-size--3 padding-trailer-0 trailer-0"></ol>
+            </div>
+          </div>
+          <div class="column-18">
+            <div id="theme-lists-panel" class="panel font-size--3">
+              <div class="text-blue font-size-1 trailer-quarter">Most Vulnerable by Theme</div>
+              <div class="block-group block-group-4-up">
+                <div class="block">
+                  <label class="theme-label THEME1-label text-center trailer-0">Socioeconomic Status</label>
+                  <ol id="THEME1-list" class="theme-list list-numbered font-size--3 padding-trailer-0 trailer-0"></ol>
+                </div>
+                <div class="block">
+                  <label class="theme-label THEME2-label text-center trailer-0">Household Composition & Disability</label>
+                  <ol id="THEME2-list" class="theme-list list-numbered font-size--3 padding-trailer-0 trailer-0"></ol>
+                </div>
+                <div class="block">
+                  <label class="theme-label THEME3-label text-center trailer-0">Minority Status & Language</label>
+                  <ol id="THEME3-list" class="theme-list list-numbered font-size--3 padding-trailer-0 trailer-0"></ol>
+                </div>
+                <div class="block">
+                  <label class="theme-label THEME4-label text-center trailer-0">Housing & Transportation</label>
+                  <ol id="THEME4-list" class="theme-list list-numbered font-size--3 padding-trailer-0 trailer-0"></ol>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- NOTIFICATIONS -->
+    <div id="notifications-node"></div>
+
+  </body>
+</html>

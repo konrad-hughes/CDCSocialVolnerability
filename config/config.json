@@ -1,0 +1,253 @@
+{
+  "appid": "",
+  "group": "",
+  "title": "CDC's Social Vulnerability Index 2014",
+  "webmap": "ec5cafc98d7d464cabbef58437d13b25",
+  "webscene": "",
+  "portalUrl": "https://www.arcgis.com",
+  "oauthappid": null,
+  "proxyUrl": "https://maps.esri.com/proxy/DotNet/proxy.ashx",
+  "units": "dual",
+  "helperServices": {
+    "geometry": {
+      "url": null
+    },
+    "printTask": {
+      "url": "https://utility.arcgisonline.com/arcgis/rest/services/Utilities/PrintingTools/GPServer/Export%20Web%20Map%20Task"
+    },
+    "elevationSync": {
+      "url": null
+    },
+    "geocode": [
+      {
+        "url": null
+      }
+    ]
+  },
+  "SVIInfos": {
+    "themes": {
+      "THEMES": {
+        "title": "Overall Score",
+        "active": true,
+        "color": "#fff",
+        "chart_fields": [
+          {
+            "name": "RPL_THEME1",
+            "alias": "Percentile ranking for Socioeconomic theme summary"
+          },
+          {
+            "name": "RPL_THEME2",
+            "alias": "Percentile ranking for Household Composition theme summary"
+          },
+          {
+            "name": "RPL_THEME3",
+            "alias": "Percentile ranking for Minority Status/Language theme"
+          },
+          {
+            "name": "RPL_THEME4",
+            "alias": "Percentile ranking for Housing/Transportation theme"
+          }
+        ],
+        "layers": []
+      },
+      "THEME1": {
+        "title": "Socioeconomic Status",
+        "active": false,
+        "color": "#73c476",
+        "chartFields": [
+          {
+            "name": "EPL_POV",
+            "alias": "Percentile Percentage of persons below poverty estimate"
+          },
+          {
+            "name": "EPL_UNEMP",
+            "alias": "Percentile Percentage of civilian (age 16+) unemployed estimate"
+          },
+          {
+            "name": "EPL_PCI",
+            "alias": "Percentile per capita income estimate"
+          },
+          {
+            "name": "EPL_NOHSDP",
+            "alias": "Percentile Percentage of persons with no high school diploma (age 25+) estimate"
+          }
+        ],
+        "layers": []
+      },
+      "THEME2": {
+        "title": "Household Composition & Disability",
+        "active": false,
+        "color": "#fe9929",
+        "chartFields": [
+          {
+            "name": "EPL_AGE65",
+            "alias": "Percentile percentage of persons aged 65 and older estimate"
+          },
+          {
+            "name": "EPL_AGE17",
+            "alias": "Percentile percentage of persons aged 17 and younger estimate"
+          },
+          {
+            "name": "EPL_DISABL",
+            "alias": "Percentile percentage of civilian noninstitutionalize d population with a disability estimate"
+          },
+          {
+            "name": "EPL_SNGPNT",
+            "alias": "Percentile percentage of single parent households with children under 18 estimate"
+          }
+        ],
+        "layers": []
+      },
+      "THEME3": {
+        "title": "Minority Status & Language",
+        "active": false,
+        "color": "#9e9ac8",
+        "chartFields": [
+          {
+            "name": "EPL_MINRTY",
+            "alias": "Percentile percentage minority (all persons except white, non-Hispanic) estimate"
+          },
+          {
+            "name": "EPL_LIMENG",
+            "alias": "Percentile percentage of persons (age 5+) who speak English 'less than well' estimate"
+          }
+        ],
+        "layers": []
+      },
+      "THEME4": {
+        "title": "Housing & Transportation",
+        "active": false,
+        "color": "#6baed6",
+        "chartFields": [
+          {
+            "name": "EPL_MUNIT",
+            "alias": "Percentile percentage housing in structures with 10 or more units estimate"
+          },
+          {
+            "name": "EPL_MOBILE",
+            "alias": "Percentile percentage mobile homes estimate"
+          },
+          {
+            "name": "EPL_CROWD",
+            "alias": "Percentile percentage households with more people than rooms estimate"
+          },
+          {
+            "name": "EPL_NOVEH",
+            "alias": "Percentile percentage households with no vehicle available estimate"
+          },
+          {
+            "name": "EPL_GROUPQ",
+            "alias": "Percentile percentage of persons in institutionalized group quarters estimate"
+          }
+        ],
+        "layers": []
+      }
+    },
+    "groupLayerInfos": [
+      {
+        "title": "County",
+        "maxScale": 600000,
+        "minScale": 0,
+        "layerInfos": [
+          {
+            "title": "Housing & Transportation",
+            "layerName": "County - Housing & Transportation",
+            "visible": false,
+            "theme": "THEME4",
+            "portalItem": {
+              "id": "73fa54443394494990c1d25e933bede7"
+            }
+          },
+          {
+            "title": "Minority Status & Language",
+            "layerName": "County - Minority Status & Language",
+            "visible": false,
+            "theme": "THEME3",
+            "portalItem": {
+              "id": "95a505a9056e4a21902ac8da592d7f04"
+            }
+          },
+          {
+            "title": "Household Composition & Disability",
+            "layerName": "County - Household Composition & Disability",
+            "visible": false,
+            "theme": "THEME2",
+            "portalItem": {
+              "id": "e2bf99511b2f4311868c758cef763d52"
+            }
+          },
+          {
+            "title": "Socioeconomic Status",
+            "layerName": "County - Socioeconomic Status",
+            "visible": false,
+            "theme": "THEME1",
+            "portalItem": {
+              "id": "ecb87d1b0e8e41ddb55c153e5c2d6db1"
+            }
+          },
+          {
+            "title": "Overall",
+            "layerName": "County - Overall SVI",
+            "visible": true,
+            "theme": "THEMES",
+            "portalItem": {
+              "id": "0a3f80ab213642df848c50db5a0594aa"
+            }
+          }
+        ]
+      },
+      {
+        "title": "Census Tracts",
+        "maxScale": 0,
+        "minScale": 600000,
+        "layerInfos": [
+          {
+            "title": "Housing & Transportation",
+            "layerName": "Census Tract - Housing & Transportation",
+            "visible": false,
+            "theme": "THEME4",
+            "portalItem": {
+              "id": "e8f44984bf4842e0839e4ec344d5571c"
+            }
+          },
+          {
+            "title": "Minority Status & Language",
+            "layerName": "Census Tract - Minority Status & Language",
+            "visible": false,
+            "theme": "THEME3",
+            "portalItem": {
+              "id": "2c7ce1c686204ccab1352d922dfdc4f6"
+            }
+          },
+          {
+            "title": "Household Composition & Disability",
+            "layerName": "Census Tract - Household Composition & Disability",
+            "visible": false,
+            "theme": "THEME2",
+            "portalItem": {
+              "id": "f6961741ace647c29d476785f7b29510"
+            }
+          },
+          {
+            "title": "Socioeconomic Status",
+            "layerName": "Census Tract - Socioeconomic Status",
+            "visible": false,
+            "theme": "THEME1",
+            "portalItem": {
+              "id": "4759ce4869d3412895b6024c02a71d35"
+            }
+          },
+          {
+            "title": "Overall",
+            "layerName": "Census Tract - Overall SVI",
+            "visible": true,
+            "theme": "THEMES",
+            "portalItem": {
+              "id": "f951e0df78604cf0ab1fda61a575be6b"
+            }
+          }
+        ]
+      }
+    ]
+  }
+}
