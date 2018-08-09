@@ -169,7 +169,7 @@ define([
         require(["esri/views/MapView"], function (MapView) {
 
           let view = new MapView(viewProperties);
-          view.then(function (response) {
+          view.when(function (response) {
             this.urlParamHelper.addToView(view, this.config);
             this._ready(view);
           }.bind(this), this.reportError);
@@ -199,7 +199,7 @@ define([
         require(["esri/views/SceneView"], function (SceneView) {
 
           let view = new SceneView(viewProperties);
-          view.then(function (response) {
+          view.when(function (response) {
             this.urlParamHelper.addToView(view, this.config);
             this._ready(view);
           }.bind(this), this.reportError);
@@ -287,11 +287,13 @@ define([
       // PRINT //
       const printServiceUrl = this.config.helperServices.printTask.url;
       if(printServiceUrl && (printServiceUrl.length > 0)) {
-        const print = new Print({ view: view, printServiceUrl: printServiceUrl, }, "print-node");
+        const print = new Print({
+          view: view,
+          printServiceUrl: printServiceUrl,
+          templateOptions: { title: "Heat Events and Social Vulnerability - " + this.config.title }
+        }, "print-node");
         this.setPrintTitle = (title) => {
-          const printTitleInput = query(".esri-print__input-text")[0];
-          printTitleInput.value = "CDC's Social Vulnerability Index 2014 - " + title;
-          printTitleInput.dispatchEvent(new Event("input"));
+          print.templateOptions.title = "Heat Events and Social Vulnerability - " + title;
         };
       } else {
         domClass.add("print-action-node", "hide");
@@ -374,6 +376,7 @@ define([
           const layerHandle = this._getLayer(view, layerInfo).then((layer) => {
 
             // UPDATE LAYER //
+            layer.outFields = ["*"];
             layer.theme = layerInfo.theme;
             layer.title = layerInfo.title;
             layer.visible = layerInfo.visible;
@@ -447,26 +450,24 @@ define([
     initializeTop10Layer: function (view) {
 
       // SELECTED SYMBOL //
-      /*
-       const selectedSymbol = new SimpleFillSymbol({
-       style: "solid",
-       color: Color.named.transparent,
-       outline: {
-       color: Color.named.cyan.concat(0.8),
-       width: 1.5
-       }
-       });
-       const simpleRenderer = new SimpleRenderer({
-       symbol: new SimpleFillSymbol({
-       style: "solid",
-       color: Color.named.transparent,
-       outline: {
-       color: Color.named.red,
-       width: 2.0
-       }
-       })
-       });
-       */
+      const selectedSymbol = new SimpleFillSymbol({
+        style: "solid",
+        color: Color.named.transparent,
+        outline: {
+          color: Color.named.cyan.concat(0.8),
+          width: 1.5
+        }
+      });
+      /*const simpleRenderer = new SimpleRenderer({
+        symbol: new SimpleFillSymbol({
+          style: "solid",
+          color: Color.named.transparent,
+          outline: {
+            color: Color.named.red,
+            width: 2.0
+          }
+        })
+      });*/
 
       const top10SymbolsJson = JSON.parse(Top10SymbolsText);
       const top10UniqueValueInfos = top10SymbolsJson.red.map((symbolInfo, symbolInfoIndex) => {
@@ -508,12 +509,28 @@ define([
 
 
       // SELECTED GRAPHIC //
-      let selectedGraphic = new Graphic({ attributes: { rank: 0 } });
+      //let selectedGraphic = new Graphic({ attributes: { rank: 0 } });
+      let selectedGraphic = new Graphic({ symbol: selectedSymbol });
       this.updateSelectedGraphic = (feature) => {
         top10Layer.source.remove(selectedGraphic);
         selectedGraphic = selectedGraphic.clone();
         selectedGraphic.geometry = feature.geometry.clone();
-        top10Layer.source.add(selectedGraphic, 0);
+        top10Layer.source.add(selectedGraphic);
+
+        /*const addIndex = 0; //top10Layer.source.length;
+        top10Layer.source.add(selectedGraphic, addIndex);
+        let selectedIndex = top10Layer.source.findIndex(graphic => {
+          return (graphic === selectedGraphic);
+        });*/
+        //console.info("addIndex:", addIndex, "selectedIndex:", selectedIndex);
+
+        /*const moveIndex = top10Layer.source.length;
+        top10Layer.source.reorder(selectedGraphic, moveIndex);
+        selectedIndex = top10Layer.source.findIndex(graphic => {
+          return (graphic === selectedGraphic);
+        });*/
+        //console.info("moveIndex:", moveIndex, "selectedIndex:", selectedIndex);
+
       };
       this.addHighlightedGraphic = (feature, rank) => {
         const highlightedGraphic = new Graphic({ geometry: feature.geometry.clone(), attributes: { rank: rank } });
@@ -615,8 +632,7 @@ define([
         }
       });
 
-    }
-    ,
+    },
 
     /**
      *
@@ -632,8 +648,7 @@ define([
       watchUtils.whenFalseOnce(view, "updating", () => {
         this.updateVulnerableLists(view, view.extent, true);
       });
-    }
-    ,
+    },
 
     /**
      *
@@ -648,8 +663,7 @@ define([
       });
       this.makeThemeActive(view, "THEMES", true);
 
-    }
-    ,
+    },
 
     /**
      *
@@ -674,8 +688,7 @@ define([
       domClass.add(themeName + "-list", "is-active");
 
       this.updateVulnerableLists(view, view.extent, selectFirst);
-    }
-    ,
+    },
 
     /**
      *
@@ -707,8 +720,7 @@ define([
         });
 
       }
-    }
-    ,
+    },
 
     /**
      *
@@ -764,8 +776,7 @@ define([
 
       });
 
-    }
-    ,
+    },
 
     /**
      *
@@ -806,7 +817,14 @@ define([
         };
       });
 
+
+      // const nodePosition = (nodeId) => {
+      //   const nodePositionInfo = domGeom.position(dom.byId(nodeId));
+      // console.info(nodeId, nodePositionInfo);
+      // };
+
       domConstruct.empty("chart_THEMES");
+      //nodePosition("chart_THEMES");
       const chart_THEMES = new Chart("chart_THEMES");
       chart_THEMES.setTheme(ChartTheme);
       chart_THEMES.fill = chart_THEMES.theme.plotarea.fill = "transparent";
@@ -842,6 +860,7 @@ define([
         });
 
 
+        //nodePosition("chart_" + themeName);
         const themeChart = new Chart("chart_" + themeName, {
           /*title: theme.title,
            titleGap: 5,
@@ -888,7 +907,5 @@ define([
 
     }
 
-  })
-      ;
-})
-;
+  });
+});
