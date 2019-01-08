@@ -1,10 +1,10 @@
 {
   "appid": "",
   "group": "",
-  "title": "CDC's Social Vulnerability Index 2014",
-  "webmap": "ec5cafc98d7d464cabbef58437d13b25",
+  "title": "Missouri CDC Social Vulnerability Index 2016",
+  "webmap": "6f193e270bd742dc87192db1f422f57c",
   "webscene": "",
-  "portalUrl": "https://www.arcgis.com",
+  "portalUrl": "https://mophep.maps.arcgis.com",
   "oauthappid": null,
   "proxyUrl": "https://maps.esri.com/proxy/DotNet/proxy.ashx",
   "units": "dual",
